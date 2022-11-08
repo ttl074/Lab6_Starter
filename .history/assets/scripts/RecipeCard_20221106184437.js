@@ -132,8 +132,8 @@ class RecipeCard extends HTMLElement {
           <a href="${data["titleLnk"]}">${data["titleTxt"]}</a>
         </p>
         <p class="organization">${data["organization"]}</p>
-        <div class="rating">
-          <span>${data["rating"]}</span>
+        <div class="${data["rating"]}">
+          <span>${data["rating"]}/span>
           <img src="/assets/images/icons/${data["rating"]}-star.svg" alt="${data["rating"]} stars">
           <span>(${data["numRatings"]})</span>
         </div>

@@ -21,8 +21,15 @@ function init() {
  * @returns {Array<Object>} An array of recipes found in localStorage
  */
 function getRecipesFromStorage() {
-  return JSON.parse(localStorage.getItem('recipes'))
-  
+  let recipes = []
+  let keys = Object.keys(localStorage) 
+  let i = keys.length
+  console.log(i)
+  while (i--){
+    console.log(localStorage.getItem(keys[i]))
+    recipes.push(JSON.parse(localStorage.getItem(keys[i])))
+  }
+  return recipes
   // A9. TODO - Complete the functionality as described in this function
   //           header. It is possible in only a single line, but should
   //           be no more than a few lines.
@@ -36,16 +43,14 @@ function getRecipesFromStorage() {
  * @param {Array<Object>} recipes An array of recipes
  */
 function addRecipesToDocument(recipes) {
-  //console.log(recipes)
   let m = document.querySelector("main")
-  //console.log(m)
-  console.log(recipes.length)
+  console.log(m)
   for (var i = 0; i < recipes.length; i++){
-    let newRecipe=document.createElement("recipe-card")
-//console.log(newRecipe)
     console.log(recipes[i])
-    newRecipe.data = recipes[i]
-    m.appendChild(newRecipe)
+    //let newRecipe = <recipe-card>
+      //data=recipes[i]
+    //</recipe-card>
+    //m.appendChild(newRecipe)
   }
   // A10. TODO - Get a reference to the <main> element
   // A11. TODO - Loop through each of the recipes in the passed in array,
@@ -60,7 +65,6 @@ function addRecipesToDocument(recipes) {
  * @param {Array<Object>} recipes An array of recipes
  */
 function saveRecipesToStorage(recipes) {
-  localStorage.setItem('recipes',recipes.toString())
   // EXPLORE - START (All explore numbers start with B)
   // B1. TODO - Complete the functionality as described in this function
   //            header. It is possible in only a single line, but should
@@ -68,47 +72,11 @@ function saveRecipesToStorage(recipes) {
 }
 
 /**
- * Adds the necessary event handlers to <form> and the clear storage
+ * Adds the necesarry event handlers to <form> and the clear storage
  * <button>.
  */
 function initFormHandler() {
-  const clear = document.getElementsByClassName("danger")[0]
-  //console.log(clear)
-  clear.addEventListener("click", (event) => {
-    console.log('clear output')
-    localStorage.clear();
-    let m = document.querySelector('main');
-    m.innerHTML = '';
-  });
-  const form = document.querySelector("form");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const formData = new FormData(form)
-    let recipeObject = {};
-    for (var formElement of formData) {
-      console.log(formElement);
-      recipeObject[formElement[0]] = formElement[1]
-    }
-    //console.log(recipeObject)
-    let newRecipe=document.createElement("recipe-card");
-    newRecipe.data = recipeObject;
-    let m = document.querySelector("main");
-    m.appendChild(newRecipe);
-    //console.log(newRecipe)
-    //console.log(JSON.stringify(newRecipe))
-    let r = JSON.parse(localStorage.getItem('recipes'))
-    //console.log(typeof r);
-    //console.log(r.length);
-    //console.log(JSON.stringify(r));
-    r.push(recipeObject);
-    //console.log(r.length);
-    //console.log(r)
-    //console.log(JSON.stringify(r));
-    localStorage.removeItem('recipes');
-    localStorage.setItem('recipes', JSON.stringify(r));
-  
-  }
-  );
+
   // B2. TODO - Get a reference to the <form> element
   
   // B3. TODO - Add an event listener for the 'submit' event, which fires when the

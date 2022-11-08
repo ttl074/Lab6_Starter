@@ -118,32 +118,6 @@ class RecipeCard extends HTMLElement {
   set data(data) {
     // If nothing was passed in, return
     if (!data) return;
-    //console.log(data[""])
-    const shadow = this.shadowRoot
-    const childNodes = Array.from(shadow.childNodes);
-    //console.log(childNodes)
-    childNodes.forEach((childNode) => {
-      if (childNode.nodeName === 'ARTICLE') {
-        //console.log(childNode.innerHTML)
-        childNode.innerHTML = `
-        <img src="${data["imgSrc"]}"
-          alt="${data["imgAlt"]}">
-        <p class="title">
-          <a href="${data["titleLnk"]}">${data["titleTxt"]}</a>
-        </p>
-        <p class="organization">${data["organization"]}</p>
-        <div class="rating">
-          <span>${data["rating"]}</span>
-          <img src="/assets/images/icons/${data["rating"]}-star.svg" alt="${data["rating"]} stars">
-          <span>(${data["numRatings"]})</span>
-        </div>
-        <time>${data["lengthTime"]}</time>
-        <p class="ingredients">
-          ${data["ingredients"]}
-        </p>`
-        //console.log(childNode.innerHTML)
-      }
-    });
 
     // A6. TODO - Select the <article> we added to the Shadow DOM in the constructor
     // A7. TODO - Set the contents of the <article> with the <article> template given in
@@ -155,4 +129,3 @@ class RecipeCard extends HTMLElement {
 
 // A8. TODO - Define the Class as a customElement so that you can create
 //           'recipe-card' elements
-customElements.define("recipe-card",RecipeCard)

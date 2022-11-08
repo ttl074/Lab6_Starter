@@ -41,11 +41,21 @@ function addRecipesToDocument(recipes) {
   //console.log(m)
   console.log(recipes.length)
   for (var i = 0; i < recipes.length; i++){
-    let newRecipe=document.createElement("recipe-card")
-//console.log(newRecipe)
     console.log(recipes[i])
-    newRecipe.data = recipes[i]
-    m.appendChild(newRecipe)
+    if (recipes[i].length >1){
+      for (var j = 0; j < recipes[i].length; j++){
+        let newRecipe=document.createElement("recipe-card")
+    //console.log(newRecipe)
+        newRecipe.data = recipes[i][j]
+        m.appendChild(newRecipe)
+      }
+    }else{
+      let newRecipe=document.createElement("recipe-card")
+    //console.log(newRecipe)
+      newRecipe.data = recipes[i]
+      m.appendChild(newRecipe)
+    }
+    
   }
   // A10. TODO - Get a reference to the <main> element
   // A11. TODO - Loop through each of the recipes in the passed in array,
@@ -72,41 +82,17 @@ function saveRecipesToStorage(recipes) {
  * <button>.
  */
 function initFormHandler() {
-  const clear = document.getElementsByClassName("danger")[0]
-  //console.log(clear)
-  clear.addEventListener("click", (event) => {
-    console.log('clear output')
-    localStorage.clear();
-    let m = document.querySelector('main');
-    m.innerHTML = '';
-  });
   const form = document.querySelector("form");
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const formData = new FormData(form)
-    let recipeObject = {};
-    for (var formElement of formData) {
-      console.log(formElement);
-      recipeObject[formElement[0]] = formElement[1]
+    const data = event.formData;
+    for (const value of data.values()){
+      console.log(value);
     }
-    //console.log(recipeObject)
-    let newRecipe=document.createElement("recipe-card");
-    newRecipe.data = recipeObject;
-    let m = document.querySelector("main");
-    m.appendChild(newRecipe);
-    //console.log(newRecipe)
-    //console.log(JSON.stringify(newRecipe))
-    let r = JSON.parse(localStorage.getItem('recipes'))
-    //console.log(typeof r);
-    //console.log(r.length);
-    //console.log(JSON.stringify(r));
-    r.push(recipeObject);
-    //console.log(r.length);
-    //console.log(r)
-    //console.log(JSON.stringify(r));
-    localStorage.removeItem('recipes');
-    localStorage.setItem('recipes', JSON.stringify(r));
-  
+    let recipeObject = {};
+    const entry = Object.entries(data);
+    recipeObject = Object.fromEntries(entry);
+    
   }
   );
   // B2. TODO - Get a reference to the <form> element

@@ -124,16 +124,17 @@ class RecipeCard extends HTMLElement {
     //console.log(childNodes)
     childNodes.forEach((childNode) => {
       if (childNode.nodeName === 'ARTICLE') {
+        //console.log("found article")
         //console.log(childNode.innerHTML)
         childNode.innerHTML = `
         <img src="${data["imgSrc"]}"
           alt="${data["imgAlt"]}">
-        <p class="title">
-          <a href="${data["titleLnk"]}">${data["titleTxt"]}</a>
+        <p class="${data["titleTxt"]}">
+          <a href="${data["titleLnk"]}">Title</a>
         </p>
-        <p class="organization">${data["organization"]}</p>
-        <div class="rating">
-          <span>${data["rating"]}</span>
+        <p class="${data["organization"]}">organization</p>
+        <div class="${data["rating"]}">
+          <span>${data["rating"]}/span>
           <img src="/assets/images/icons/${data["rating"]}-star.svg" alt="${data["rating"]} stars">
           <span>(${data["numRatings"]})</span>
         </div>
@@ -141,7 +142,7 @@ class RecipeCard extends HTMLElement {
         <p class="ingredients">
           ${data["ingredients"]}
         </p>`
-        //console.log(childNode.innerHTML)
+        console.log(childNode.innerHTML)
       }
     });
 

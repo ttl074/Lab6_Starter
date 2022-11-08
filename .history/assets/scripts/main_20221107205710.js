@@ -72,14 +72,6 @@ function saveRecipesToStorage(recipes) {
  * <button>.
  */
 function initFormHandler() {
-  const clear = document.getElementsByClassName("danger")[0]
-  //console.log(clear)
-  clear.addEventListener("click", (event) => {
-    console.log('clear output')
-    localStorage.clear();
-    let m = document.querySelector('main');
-    m.innerHTML = '';
-  });
   const form = document.querySelector("form");
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -89,24 +81,25 @@ function initFormHandler() {
       console.log(formElement);
       recipeObject[formElement[0]] = formElement[1]
     }
-    //console.log(recipeObject)
+    console.log(recipeObject)
     let newRecipe=document.createElement("recipe-card");
     newRecipe.data = recipeObject;
+    console.log(newRecipe)
     let m = document.querySelector("main");
     m.appendChild(newRecipe);
-    //console.log(newRecipe)
-    //console.log(JSON.stringify(newRecipe))
-    let r = JSON.parse(localStorage.getItem('recipes'))
-    //console.log(typeof r);
-    //console.log(r.length);
-    //console.log(JSON.stringify(r));
-    r.push(recipeObject);
-    //console.log(r.length);
-    //console.log(r)
-    //console.log(JSON.stringify(r));
-    localStorage.removeItem('recipes');
+    let r = getRecipesFromStorage();
+    console.log(r.length)
+    r.push(newRecipe);
+    console.log(r.length)
     localStorage.setItem('recipes', JSON.stringify(r));
-  
+    const clear = document.querySelector('danger');
+    console.log('clear')
+    clear.addEventListener("click", (event) => {
+      console.log('clear output')
+      localStorage.clear();
+      m = querySelector('main');
+      m.innerHTML = '';
+    });
   }
   );
   // B2. TODO - Get a reference to the <form> element

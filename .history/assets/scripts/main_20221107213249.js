@@ -73,7 +73,7 @@ function saveRecipesToStorage(recipes) {
  */
 function initFormHandler() {
   const clear = document.getElementsByClassName("danger")[0]
-  //console.log(clear)
+  console.log(clear)
   clear.addEventListener("click", (event) => {
     console.log('clear output')
     localStorage.clear();
@@ -89,21 +89,21 @@ function initFormHandler() {
       console.log(formElement);
       recipeObject[formElement[0]] = formElement[1]
     }
-    //console.log(recipeObject)
+    console.log(recipeObject)
     let newRecipe=document.createElement("recipe-card");
     newRecipe.data = recipeObject;
     let m = document.querySelector("main");
     m.appendChild(newRecipe);
-    //console.log(newRecipe)
-    //console.log(JSON.stringify(newRecipe))
+    console.log(newRecipe)
+    console.log(JSON.stringify(newRecipe))
     let r = JSON.parse(localStorage.getItem('recipes'))
-    //console.log(typeof r);
-    //console.log(r.length);
-    //console.log(JSON.stringify(r));
-    r.push(recipeObject);
-    //console.log(r.length);
-    //console.log(r)
-    //console.log(JSON.stringify(r));
+    console.log(typeof r);
+    console.log(r.length);
+    console.log(JSON.stringify(r));
+    r.push(newRecipe);
+    console.log(r.length);
+    console.log(r)
+    console.log(JSON.stringify(r));
     localStorage.removeItem('recipes');
     localStorage.setItem('recipes', JSON.stringify(r));
   

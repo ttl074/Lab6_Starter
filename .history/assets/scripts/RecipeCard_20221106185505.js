@@ -8,8 +8,7 @@ class RecipeCard extends HTMLElement {
     const shadow = this.attachShadow({ mode: "open"});
     let style = document.createElement("style");
     let article = document.createElement("article");
-    style.textContent = `
-    * {
+    style.textContent = `* {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
@@ -132,7 +131,7 @@ class RecipeCard extends HTMLElement {
           <a href="${data["titleLnk"]}">${data["titleTxt"]}</a>
         </p>
         <p class="organization">${data["organization"]}</p>
-        <div class="rating">
+        <div class="${data["rating"]}">
           <span>${data["rating"]}</span>
           <img src="/assets/images/icons/${data["rating"]}-star.svg" alt="${data["rating"]} stars">
           <span>(${data["numRatings"]})</span>
